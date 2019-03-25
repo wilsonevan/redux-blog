@@ -8,7 +8,7 @@ class BlogForm extends React.Component {
 
   componentDidMount() {
     let headerFlag = false
-    debugger
+    // debugger
 
     if ( this.state.title != "" ){
       headerFlag = true
@@ -65,7 +65,7 @@ class BlogForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  debugger
+  // debugger
   const newId = state.nextId
 
 	return { id: newId, title: state.blogs[newId].title, content: state.content, };
