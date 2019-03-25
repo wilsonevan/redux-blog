@@ -3,7 +3,19 @@ import { connect, } from 'react-redux';
 import { Form, Button, } from 'semantic-ui-react';
 
 class BlogForm extends React.Component {
-  state = { title: '', content: '', };
+  state = { title: '', content: '', headerFlag: false, };
+
+
+  componentDidMount() {
+    let headerFlag = false
+    debugger
+
+    if ( this.state.title != "" ){
+      headerFlag = true
+    }
+
+    this.setState( {title: this.state.title, content: this.state.content, headerFlag: headerFlag, } )
+  }
 
   handleSubmit = (e) => {
 		e.preventDefault();
@@ -23,10 +35,10 @@ class BlogForm extends React.Component {
 
   render() {
     const { title, content } = this.state;
-
+       
     return (
       <div>
-        <h3>Add A Blog</h3>
+        <h3>{ this.state.headerFlag ? 'Edit Blog' : 'Add a Blog' }</h3>
         <Form>
           <Form.Field>
             <Form.Input 
@@ -53,8 +65,10 @@ class BlogForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	// debugger
-	return { id: state.nextId, };
+  debugger
+  const newId = state.nextId
+
+	return { id: newId, title: state.blogs[newId].title, content: state.content, };
 };
 
 export default connect(mapStateToProps)(BlogForm);
